@@ -1,82 +1,133 @@
-import React, { useState } from "react";
-import SearchBar from "../components/SearchBar";
-import "../pages/SearchForm.css";
+import React, { useState } from 'react';
+import './SearchForm.css';
 
-const allMovies = [
-   {
-    id: 1,
-    title: "",
-    description: ""
-  },
-  {
-    id: 2,
-    title: "",
-    description: ""
-  },
-  {
-    id: 3,
-    title: "",
-    description: ""
-  }
-];
+const SearchBar = () => {
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-export default function SearchForm() {
-  const [searchTerm, setSearchTerm] = useState("");
-  
-  // Filter movies based on search term
-  const filteredMovies = allMovies.filter(movie => {
-    if (!searchTerm.trim()) return true;
-    return (
-      movie.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      movie.description.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  });
+  const handleSubmit = () => {
+    if (!query.trim()) return;
+    setIsLoading(true);
+    setError(null); 
 
-  const handleSearch = (term) => {
-    setSearchTerm(term);
+    fetch(`https://imdb.iamidiotareyoutoo.com/search?q=${encodeURIComponent(query)}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        setResults(data);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        setError(err.message);
+        setIsLoading(false);
+      });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form submitted with:", searchTerm);
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmit();
+    }
   };
 
   return (
-    <div className="search-form-page">
-      <form onSubmit={handleSubmit} className="search-form">
-        <SearchBar 
-          onSearch={handleSearch} 
-          placeholder="Search movies by title or description..."
-        />
-        <button type="submit" className="submit-button">
-          Search
-        </button>
-      </form>
 
-      <div className="search-results">
-        {searchTerm && filteredMovies.length === 0 ? (
-          <div className="no-results">
-            <p>No movies found for "{searchTerm}"</p>
+      <div className="movie-search-content">
+        <h1 className="movie-search-title">Movie Search</h1>
+        
+        <div className="movie-search-box">
+          <div className="movie-input-group">
+            <input
+              type="text"
+              placeholder="Search for a movie..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyPress={handleKeyPress}
+              className="movie-search-input"
+            />
+            <button 
+              onClick={handleSubmit}
+              disabled={isLoading}
+              className="movie-search-button"
+            >
+              {isLoading ? 'Searching...' : 'Search'}
+            </button>
           </div>
-        ) : (
-          <>
-            {searchTerm && (
-              <p className="results-count">
-                Found {filteredMovies.length} movie{filteredMovies.length !== 1 ? 's' : ''}
-              </p>
-            )}
+        </div>
+
+        {isLoading && (
+          <p className="movie-loading-text">Loading results...</p>
+        )}
+        
+        {error && (
+          <p className="movie-error-text">Error: {error}</p>
+        )}
+        
+        {results && results.description && results.description.length > 0 && (
+          <div>
+            <h2 className="movie-results-title">
+              Found {results.description.length} result{results.description.length !== 1 ? 's' : ''}
+            </h2>
             
-            <div className="movies-grid">
-              {filteredMovies.map(movie => (
-                <div key={movie.id} className="movie-card">
-                  <h3>{movie.title}</h3>
-                  <p>{movie.description}</p>
+            <div className="movie-grid">
+              {results.description.map((movie, index) => (
+                <div 
+                  key={movie['#IMDB_ID'] || index} 
+                  className="movie-card"
+                >
+                  {movie['#IMG_POSTER'] && (
+                    <img 
+                      src={movie['#IMG_POSTER']} 
+                      alt={movie['#TITLE']}
+                      className="movie-poster"
+                    />
+                  )}
+                  
+                  <div className="movie-card-content">
+                    <h3 className="movie-title">{movie['#TITLE']}</h3>
+                    
+                    {movie['#YEAR'] && (
+                      <p className="movie-year">Year: {movie['#YEAR']}</p>
+                    )}
+                    
+                    {movie['#ACTORS'] && movie['#ACTORS'].trim() && (
+                      <p className="movie-actors">
+                        <span className="movie-actors-label">Actors:</span> {movie['#ACTORS']}
+                      </p>
+                    )}
+                    
+                    {movie['#RANK'] && (
+                      <p className="movie-rank">Rank: #{movie['#RANK']}</p>
+                    )}
+                    
+                    {movie['#IMDB_URL'] && (
+                      <a 
+                        href={movie['#IMDB_URL']} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="movie-link"
+                      >
+                        View on IMDb
+                      </a>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
-          </>
+          </div>
+        )}
+        
+        {results && results.description && results.description.length === 0 && (
+          <p className="movie-no-results">No results found. Try a different search term.</p>
         )}
       </div>
-    </div>
+ 
   );
-}
+};
+
+export default SearchBar;
