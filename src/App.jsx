@@ -2,6 +2,7 @@ import ImageSlider from "../Movie-Tracker/src/ImageSlider";
 import SearchForm from "../Movie-Tracker/src/pages/SearchForm";
 
 import "./App.css";
+import Signup from "../Movie-Tracker/src/components/Signup";
 
 const App = () => {
   const slides = [
