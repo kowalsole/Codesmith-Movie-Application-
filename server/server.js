@@ -7,7 +7,7 @@ const PORT = 3000;
 
 app.use(express.json());
 
-app.use("/api/movies", router);
+app.use("/api", router);
 
 app.use((err, req, res, next) => {
   const defaultErr = {
@@ -17,7 +17,7 @@ app.use((err, req, res, next) => {
   };
   const errorObj = Object.assign({}, defaultErr, err);
   console.log(errorObj.log);
-  // console.log(err);
+  console.log(err);
   return res.status(errorObj.status).json(errorObj.message);
 });
 
