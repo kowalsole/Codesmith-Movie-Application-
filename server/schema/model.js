@@ -14,6 +14,7 @@ const watchlistSchema = new mongoose.Schema({
   iswatched: { type: Boolean, default: false },
 });
 
+
 const Watchlist = mongoose.model("Watchlist", watchlistSchema);
 
 export default Watchlist;
