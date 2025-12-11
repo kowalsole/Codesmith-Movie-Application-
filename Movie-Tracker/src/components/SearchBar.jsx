@@ -11,13 +11,13 @@ export default function SearchBar({ onSearch, placeholder }) {
     onSearch(term);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSearch(value);
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   onSearch(value);
+  // };
 
   return (
-    <form className="search-container" onSubmit={handleSubmit}>
+    <form className="search-container" onSubmit={value}>
       <input
         type="text"
         className="search-input"

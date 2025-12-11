@@ -9,7 +9,7 @@ import User from './schema/userModel.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// server set up 
+// server set up
 const app = express();
 const PORT = 5500;
 
@@ -25,16 +25,16 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true 
 app.use(express.static(__dirname));
 
 // serve the navbar as root (change to index.html if you have one)
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'NavigationBar.html'));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "NavigationBar.html"));
 });
 
-app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, 'login.html'));
+app.get("/login", (req, res) => {
+  res.sendFile(path.join(__dirname, "login.html"));
 });
 
-app.get('/signup', (req, res) => {
-  res.sendFile(path.join(__dirname, 'signup.html'));
+app.get("/signup", (req, res) => {
+  res.sendFile(path.join(__dirname, "signup.html"));
 });
 
 app.post('/signup', async (req, res) => {
