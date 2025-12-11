@@ -1,0 +1,259 @@
+/*/ SLIDER CONTAINER */
+/* ImageSlider container holding poster, title, and description*/
+.image-slider-container {
+  width: 100%;
+  width: 2550px;
+  margin: -30px -1200px 300px;
+  padding: 20px;
+}
+
+.slider-layout {
+  display: flex;
+  gap: 60px;
+  align-items: flex-start;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.slider-section {
+  flex: 0 0 auto;
+}
+
+/* SLIDER */
+.slider {
+  /* position: relative; */
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
+  background-color: #f5f5f5;
+  margin: 2px 2px 15px 5px;
+
+}
+
+/* //POSTER CONTAINER */
+.slide-container {
+  width: 650px;
+  height: 770px;
+  /* margin: -20px 40px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+/* POSTER */
+.slide-image {
+  width: 70%;
+  height: 90%;
+  background-color: aqua;
+  object-fit: cover;
+  border-radius: 16px;
+  margin-left: 200px;
+  margin-bottom: 160px;
+ box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.6),   /* inner glow */
+    7px 7px 11px rgba(0, 0, 0, 0.1);           /* existing outer shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.slide-image:hover {
+   transform: scale(1.05);
+  box-shadow: 
+    inset 0 0 30px rgba(255, 255, 255, 0.7),
+    0 0 20px rgba(184, 69, 19, 0.5);
+  filter: brightness(1.1);
+  cursor: pointer;
+}
+
+/* ARROWS */
+.arrow {
+  /* position: absolute; */
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 40px;
+  color: #f5f5f5;;
+  z-index: 1;
+  cursor: pointer;
+  background-color: #f5f5f5;;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  transition: background-color 0.3s;
+}
+.arrow:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.arrow-left {
+  left: 20px;
+}
+.arrow-right {
+  right: 20px;
+}
+
+/* Text Content Section (Right side) */
+.text-content {
+  flex: 1;
+  max-width: 200px;
+  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* MOVIE TITLE */
+.slide-title {
+  font-size: 90px;
+  text-transform: capitalize;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin: -825px 0px 30px -430px;
+  color: #333;
+  line-height: 1.1;
+}
+
+/* MOVIE DESCRIPTION */
+.slide-description {
+  display:flex;
+  flex:wrap;  
+max-width: 60%;
+ font-size: 36px;
+ color: rgb(42, 38, 41);
+ font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+ line-height: 1.4;
+margin: 20px 0px 30px 805px;
+text-align: justify;
+}
+
+/* MOVIE DATA TABLE */
+.table-section {
+  width: 100%;
+ margin-top: 380px;
+ /* margin-left: 370px; */
+ margin-right: 350px;
+}
+
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  /* padding-left: 140px; */
+}
+
+/* .info-table thead {
+  /* background-color: #2c3e50; */
+  /* color: rgb(46, 20, 243);
+  font-size: 60px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
+  /* margin: 220px;  */
+  /* padding:40px; */
+/* }  */
+
+.info-table th {
+  padding: 20px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 36px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.info-table tbody tr {
+  border-bottom: 1px solid #eaeaea;
+  transition: background-color 0.2s;
+}
+
+.info-table tbody tr:nth-of-type(even) {
+  background-color: #f8f9fa;
+}
+
+.info-table tbody tr:hover {
+  background-color: #e9f7fe;
+}
+
+.info-table td {
+  padding: 8px 220px;
+  color: #333;
+  font-size: 30px;
+  text-align: left;
+  margin-right: 40px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+  .slider-layout {
+    gap: 40px;
+  }
+  
+  .slide-container {
+    width: 480px;
+    height: 700px;
+  }
+  
+  .slide-title {
+    font-size: 70px;
+  }
+  
+  .slide-description {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .slider-layout {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+  
+  .text-content {
+    max-width: 100%;
+    padding-top: 0;
+    text-align: center;
+  }
+  
+  .slide-title {
+    font-size: 60px;
+  }
+  
+  .slide-description {
+    font-size: 24px;
+  }
+  
+  .info-table th {
+    font-size: 20px;
+  }
+  
+  .info-table td {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .slide-container {
+    width: 100%;
+    height: 500px;
+    max-width: 400px;
+  }
+  
+  .arrow {
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+  }
+  
+  .slide-title {
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+  
+  .slide-description {
+    font-size: 20px;
+  }
+  
+  .info-table th,
+  .info-table td {
+    padding: 15px;
+    font-size: 16px;
+  }
+}
