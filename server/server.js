@@ -1,28 +1,30 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
+import router from "./routes/routes.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// server set up 
+// server set up
 const app = express();
 const PORT = 5500;
 
+app.use("/api", router);
 // serve static files (CSS/HTML in this folder)
 app.use(express.static(__dirname));
 
 // serve the navbar as root (change to index.html if you have one)
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'NavigationBar.html'));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "NavigationBar.html"));
 });
 
-app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, 'login.html'));
+app.get("/login", (req, res) => {
+  res.sendFile(path.join(__dirname, "login.html"));
 });
 
-app.get('/signup', (req, res) => {
-  res.sendFile(path.join(__dirname, 'signup.html'));
+app.get("/signup", (req, res) => {
+  res.sendFile(path.join(__dirname, "signup.html"));
 });
 
 app.listen(PORT, () => {
