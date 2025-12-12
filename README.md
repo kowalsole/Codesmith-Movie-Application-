@@ -1,8 +1,8 @@
 # Ghost Orchids
 
-Movie search application 
+Movie search application
 
-Diagram: 
+Diagram:
 
 https://excalidraw.com/#json=-Nvi-ATqr5F4GeJHpV0l4,2hhlOAv0OqSsmJdCIWk2aQ
 
@@ -16,11 +16,14 @@ Backend end points are:
 
 http://localhost:5500/api/{title}
 
-What is available: 
+What is available:
 
 Frontend: movie search UI and fetching to the backend server api.
 
 Backend: api is available on localhost:5500/api
 
-
 Two models are available: watchlist schema unde schema and mode.js and the user model to attempt and create a new user
+
+.env
+
+holds either the mongodb connection string or supabase connection string
