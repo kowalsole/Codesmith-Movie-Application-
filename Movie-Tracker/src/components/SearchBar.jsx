@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "../pages/SearchForm.css";
 
-
 export default function SearchBar({ onSearch, placeholder }) {
   const [value, setValue] = useState("");
 
@@ -32,4 +31,3 @@ export default function SearchBar({ onSearch, placeholder }) {
     </form>
   );
 }
-

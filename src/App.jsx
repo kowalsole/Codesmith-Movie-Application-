@@ -10,10 +10,14 @@ const App = () => {
   ];
 
   return (
-    <div className="app">
-      {/* <Navigation></Navigation> */}
-      {/* <ImageSlider slides={slides} /> */}
-      <SearchForm></SearchForm>
+    <div>
+      <Signup></Signup>
+
+      <div className="app">
+        {/* <Navigation></Navigation> */}
+        {/* <ImageSlider slides={slides} /> */}
+        <SearchForm></SearchForm>
+      </div>
     </div>
   );
 };
