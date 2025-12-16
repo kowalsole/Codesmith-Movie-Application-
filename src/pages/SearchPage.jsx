@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./SearchPage.css";
 import SearchResults from "../components/SearchResults";
+import SearchBar from "../components/SearchBar";
 
 const SearchPage = () => {
   const [query, setQuery] = useState("");
@@ -10,10 +11,10 @@ const SearchPage = () => {
 
   const handleSubmit = () => {
     if (!query.trim()) return;
-
     setIsLoading(true);
     setError(null);
 
+    // fetch(`https://imdb.iamidiotareyoutoo.com/search?q=${encodeURIComponent(query)}`)
     fetch(`http://localhost:5500/api/${encodeURIComponent(query)}`)
       .then((response) => {
         if (!response.ok) {
@@ -38,28 +39,17 @@ const SearchPage = () => {
   };
 
   return (
+    <>
     <div className="movie-search-content">
       <h1 className="movie-search-title">Movie Search</h1>
 
-      <div className="movie-search-box">
-        <div className="movie-input-group">
-          <input
-            type="text"
-            placeholder="Search for a movie..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            onKeyPress={handleKeyPress}
-            className="movie-search-input"
-          />
-          <button
-            onClick={handleSubmit}
-            disabled={isLoading}
-            className="movie-search-button"
-          >
-            {isLoading ? "Searching..." : "Search"}
-          </button>
-        </div>
-      </div>
+    <SearchBar
+        query={query}
+        isLoading={isLoading}
+        onQueryChange={(e)=> setQuery(e.target.value)}
+        onSubmit={handleSubmit}
+        onKeyPress={handleKeyPress}
+      />
 
       <SearchResults
         results={results}
@@ -67,6 +57,7 @@ const SearchPage = () => {
         error={error}
       />
     </div>
+    </>
   );
 };
 

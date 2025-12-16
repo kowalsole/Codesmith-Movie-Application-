@@ -1,4 +1,3 @@
-
 import SearchPage from "./pages/SearchPage";
 
 import "./App.css";
@@ -8,11 +7,11 @@ const App = () => {
 
   return (
     <div>
-      <Signup></Signup>
+      <Signup />
 
       <div className="app">
 
-        <SearchPage></SearchPage>
+        <SearchPage/>
       </div>
     </div>
   );
