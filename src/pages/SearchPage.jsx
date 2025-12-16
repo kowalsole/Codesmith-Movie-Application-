@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SearchBar from "../components/SearchBar";
 import "./SearchPage.css";
+import { Link } from "react-router-dom"
 
 const SearchPage = () => {
   const [query, setQuery] = useState("");
@@ -64,16 +65,16 @@ const SearchPage = () => {
           <div className="movie-grid">
             {results.description.map((movie, index) => (
               <div key={movie["#IMDB_ID"] || index} className="movie-card">
+              <Link to={`/movie/${movie["#IMDB_ID"]}`}>
                 {movie["#IMG_POSTER"] && (
-                  <img
+                  <img 
                     src={movie["#IMG_POSTER"]}
                     alt={movie["#TITLE"]}
                     className="movie-poster"
                   />
                 )}
-
-                <div className="movie-card-content">
-                  <h3 className="movie-title">{movie["#TITLE"]}</h3>
+                <h3 className="movie-title">{movie["#TITLE"]}</h3>
+              </Link>
 
                   {movie["#YEAR"] && (
                     <p className="movie-year">Year: {movie["#YEAR"]}</p>
@@ -101,7 +102,6 @@ const SearchPage = () => {
                     </a>
                   )}
                 </div>
-              </div>
             ))}
           </div>
         </div>
