@@ -1,5 +1,5 @@
 
-import SearchForm from "./pages/SearchForm";
+import SearchPage from "./pages/SearchPage";
 
 import "./App.css";
 import Signup from "./components/Signup";
@@ -12,7 +12,7 @@ const App = () => {
 
       <div className="app">
 
-        <SearchForm></SearchForm>
+        <SearchPage></SearchPage>
       </div>
     </div>
   );

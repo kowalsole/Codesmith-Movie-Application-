@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import "./SearchForm.css";
+import "./SearchPage.css";
 import SearchResults from "../components/SearchResults";
 
-const SearchBar = () => {
+const SearchPage = () => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -70,4 +70,4 @@ const SearchBar = () => {
   );
 };
 
-export default SearchBar;
+export default SearchPage;
