@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import "./SearchForm.css";
+import SearchBar from "../components/SearchBar";
+import "./SearchPage.css";
 
-const SearchBar = () => {
+const SearchPage = () => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -37,28 +38,17 @@ const SearchBar = () => {
   };
 
   return (
+    <>
     <div className="movie-search-content">
       <h1 className="movie-search-title">Movie Search</h1>
 
-      <div className="movie-search-box">
-        <div className="movie-input-group">
-          <input
-            type="text"
-            placeholder="Search for a movie..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            onKeyPress={handleKeyPress}
-            className="movie-search-input"
-          />
-          <button
-            onClick={handleSubmit}
-            disabled={isLoading}
-            className="movie-search-button"
-          >
-            {isLoading ? "Searching..." : "Search"}
-          </button>
-        </div>
-      </div>
+      <SearchBar
+        query={query}
+        isLoading={isLoading}
+        onQueryChange={(e)=> setQuery(e.target.value)}
+        onSubmit={handleSubmit}
+        onKeyPress={handleKeyPress}
+      />
 
       {isLoading && <p className="movie-loading-text">Loading results...</p>}
 
@@ -123,7 +113,8 @@ const SearchBar = () => {
         </p>
       )}
     </div>
+    </>
   );
 };
 
-export default SearchBar;
+export default SearchPage;

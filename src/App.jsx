@@ -1,5 +1,4 @@
-
-import SearchForm from "./pages/SearchForm";
+import SearchPage from "./pages/SearchPage";
 
 import "./App.css";
 import Signup from "./components/Signup";
@@ -8,11 +7,11 @@ const App = () => {
 
   return (
     <div>
-      <Signup></Signup>
+      <Signup />
 
       <div className="app">
 
-        <SearchForm></SearchForm>
+        <SearchPage/>
       </div>
     </div>
   );
