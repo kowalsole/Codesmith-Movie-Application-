@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import SearchBar from "../components/SearchBar";
 import "./SearchPage.css";
 import { Link } from "react-router-dom"
+import SearchResults from "../components/SearchResults";
+import SearchBar from "../components/SearchBar";
 
 const SearchPage = () => {
   const [query, setQuery] = useState("");
@@ -43,7 +44,7 @@ const SearchPage = () => {
     <div className="movie-search-content">
       <h1 className="movie-search-title">Movie Search</h1>
 
-      <SearchBar
+    <SearchBar
         query={query}
         isLoading={isLoading}
         onQueryChange={(e)=> setQuery(e.target.value)}
@@ -112,6 +113,11 @@ const SearchPage = () => {
           No results found. Try a different search term.
         </p>
       )}
+      <SearchResults
+        results={results}
+        isLoading={isLoading}
+        error={error}
+      />
     </div>
     </>
   );
