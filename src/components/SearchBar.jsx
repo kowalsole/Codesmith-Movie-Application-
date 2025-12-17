@@ -1,4 +1,11 @@
-const SearchBar = ({ query, isLoading, onQueryChange, onSubmit, onKeyPress }) => {
+// Presentational search input component for querying movies
+const SearchBar = ({
+  query,
+  isLoading,
+  onQueryChange,
+  onSubmit,
+  onKeyPress,
+}) => {
   return (
     <div className="movie-search-box">
       <div className="movie-input-group">
@@ -20,5 +27,5 @@ const SearchBar = ({ query, isLoading, onQueryChange, onSubmit, onKeyPress }) =>
       </div>
     </div>
   );
-}
+};
 export default SearchBar;

@@ -1,4 +1,4 @@
-import User from "../schema/model.js";
+import User from '../schema/model.js';
 
 //create and save new use into the database
 const userController = {
@@ -9,18 +9,18 @@ const userController = {
     //validate input
     if (!username || !password || !email) {
       return next({
-        log: "UserController.createUser: Missing required fields",
+        log: 'UserController.createUser: Missing required fields',
         status: 400,
-        message: { err: "Username, email, and password are required." },
+        message: { err: 'Username, email, and password are required.' },
       });
     }
 
     User.create({ username, password, email }, (err, user) => {
       if (err) {
         return next({
-          log: "UserController.createUser: Error creating user",
+          log: 'UserController.createUser: Error creating user',
           status: 500,
-          message: { err: "An error occured while creating the user." },
+          message: { err: 'An error occured while creating the user.' },
         });
       } else {
         //save the user info in res.locals
@@ -35,9 +35,9 @@ const userController = {
       // error handling for express global middleware to catch
       if (err) {
         return next({
-          log: "UserController.getAllUsers: Error retrieving users",
+          log: 'UserController.getAllUsers: Error retrieving users',
           status: 500,
-          message: { err: "An error occurred while retrieving users." },
+          message: { err: 'An error occurred while retrieving users.' },
         });
       }
       //store received users in res.locals

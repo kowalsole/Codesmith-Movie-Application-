@@ -1,36 +1,38 @@
-import { useState } from "react";
+// Signup page component responsible for creating new user accounts
+import { useState } from 'react';
 
+// Handles user input, form submission, and communication with the signup API
 export default function Signup() {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch("/signup", {
-        method: "POST",
+      const response = await fetch('/signup', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ username, email, password }),
       });
       const data = await response.text();
       if (!response.ok) {
-        setError(data || "Signup failed");
+        setError(data || 'Signup failed');
         return;
       }
     } catch (err) {
-      setError("An error occurred. Please try again.");
+      setError('An error occurred. Please try again.');
     }
   };
 
   return (
     <div>
       <h2>Sign Up</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <div>
           <input

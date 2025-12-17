@@ -69,9 +69,11 @@ Start the development server:
 
 Follow the terminal output to open the locally hosted app in your browser.
 
+---
+
 ## Version 1 (Ghost Orchids) vs Version 2 (Sagittarius)
 
-## ✅ V1 Ghost Orchis Features
+### ✅ V1 Ghost Orchids Features
 **Frontend**
 - Movie search and tracker UI
 - Fetching data from the backend API
@@ -80,8 +82,7 @@ Follow the terminal output to open the locally hosted app in your browser.
 - Local API endpoint for movie data
 - Basic schema setup for users and watchlists
 
-## 🌟 V2 Sagittarius Features
-
+### 🌟 V2 Sagittarius Features
 - Modularized frontend architecture
 - New internal Movie Details page (replacing external IMDb redirects)
 - User authentication, Sign-up and Login
@@ -90,8 +91,6 @@ Follow the terminal output to open the locally hosted app in your browser.
 - Component-level tests validate rendering logic
 - Integration tests verify user flows and navigation
 
-
 ## 📌 Notes
-
 This project is under active development and designed to be extended with additional features such as persistent user data, enhanced filtering, and improved UX.
 
