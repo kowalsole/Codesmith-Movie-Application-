@@ -1,11 +1,6 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-
-//password: hspX6K3q9KeAF5P8
-
-//MongoURL string = mongodb+srv://scratch-ghost-orchid:hspX6K3q9KeAF5P8@movie-application.hzdjoui.mongodb.net/?appName=Movie-application
-
-//we are going to store things user saved from the external api
+// Defines the schema for movies or shows a user saves from the external IMDb API
 const watchlistSchema = new mongoose.Schema({
   imdbId: { type: String, required: true },
   title: { type: String, required: true },
@@ -14,7 +9,7 @@ const watchlistSchema = new mongoose.Schema({
   iswatched: { type: Boolean, default: false },
 });
 
-
-const Watchlist = mongoose.model("Watchlist", watchlistSchema);
+// Creates and exports the Watchlist model for interacting with the watchlist collection
+const Watchlist = mongoose.model('Watchlist', watchlistSchema);
 
 export default Watchlist;

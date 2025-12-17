@@ -1,12 +1,9 @@
-import React from "react";
-import MovieCard from "./MovieCard";
+// Component responsible for rendering search results and handling loading/error states
+import React from 'react';
+import MovieCard from './MovieCard';
 
-
-const SearchResults = ({ results, isLoading, error }) => {
-  if (isLoading) {
-    return <p className="movie-loading-text">Loading results...</p>;
-  }
-
+// Displays a list of movie results or appropriate UI feedback based on request state
+const SearchResults = ({ results, error }) => {
   if (error) {
     return <p className="movie-error-text">Error: {error}</p>;
   }
@@ -27,15 +24,12 @@ const SearchResults = ({ results, isLoading, error }) => {
     <div>
       <h2 className="movie-results-title">
         Found {results.description.length} result
-        {results.description.length !== 1 ? "s" : ""}
+        {results.description.length !== 1 ? 's' : ''}
       </h2>
 
       <div className="movie-grid">
         {results.description.map((movie, index) => (
-          <MovieCard
-            key={movie["#IMDB_ID"] || index}
-            movie={movie}
-          />
+          <MovieCard key={movie['#IMDB_ID'] || index} movie={movie} />
         ))}
       </div>
     </div>
