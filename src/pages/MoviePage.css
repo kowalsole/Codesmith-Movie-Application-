@@ -1,0 +1,52 @@
+.movie-page {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    padding: 2rem;
+    background-color: #F8F8F8;
+}
+
+.movie-poster {
+    width: 350px;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.movie-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.movie-title {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.movie-year {
+    font-weight: 400;
+    font-size: 2rem;
+    color: #9ca3af;
+}
+
+.movie-meta {
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+    color: #9ca3af;
+}
+
+.movie-meta .dot {
+    margin: 0.5rem;
+}
+
+.movie-description {
+    margin-top: 4rem;
+    font-size: 1.25rem;
+}
+
+.movie-director,
+.movie-actors {
+    margin-top: 2rem;
+    color: black;
+}
