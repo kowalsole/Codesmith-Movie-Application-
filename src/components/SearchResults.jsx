@@ -24,7 +24,8 @@ const SearchResults = ({ results, isLoading, error }) => {
   }
 
   return (
-    <div>
+    // <div>
+        <div className="results-wrapper"> 
       <h2 className="movie-results-title">
         Found {results.description.length} result
         {results.description.length !== 1 ? "s" : ""}

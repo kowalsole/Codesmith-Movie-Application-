@@ -1,3 +1,6 @@
+import searchIcon from "../assets/search.png";
+
+
 const SearchBar = ({ query, isLoading, onQueryChange, onSubmit, onKeyPress }) => {
   return (
     <div className="movie-search-box">
@@ -15,7 +18,16 @@ const SearchBar = ({ query, isLoading, onQueryChange, onSubmit, onKeyPress }) =>
           disabled={isLoading}
           className="movie-search-button"
         >
-          {isLoading ? 'Searching...' : 'Search'}
+         {isLoading ? (
+  <span>Searching...</span>
+) : (
+  <img
+    src={searchIcon}
+    alt="Search"
+    className="search-icon"
+  />
+)}
+
         </button>
       </div>
     </div>

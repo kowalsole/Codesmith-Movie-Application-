@@ -5,6 +5,7 @@ export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [open, setOpen] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,34 +30,29 @@ export default function Signup() {
 
   return (
     <div>
-      <h2>Sign Up</h2>
+      <h2></h2>
       {error && <p style={{ color: "red" }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <input
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
+      
+ <div className="top-bar"> 
+  <h1 className="movie-search-title-name"></h1> 
+ <form onSubmit={handleSubmit} className="signup-form">
+      <button
+        type="button"
+        onClick={() => setOpen((prev) => !prev)}
+        className="signup-toggle"
+      >
+       {open ? "Sign Up" : "Movie Search"}
+      </button>
 
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+      <div className={`signup-dropdown ${open ? "open" : ""}`}>
+        
+        <input type="email" placeholder="Email" />
+        <input type="password" placeholder="Password" />
 
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-
-          <button type="submit">Sign Up</button>
-        </div>
-      </form>
-    </div>
+        <button type="submit" className="create-account-btn">Create Account</button>
+      </div>
+    </form>
+</div>
+</div>
   );
-}
+} 

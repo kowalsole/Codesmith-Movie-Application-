@@ -1,66 +1,76 @@
+body{
+  background-color: rgb(23, 22, 23);
+  color: rgb(194, 185, 185);    
+}
 
-.movie-search-container {
-  /* min-height: 100vh; */
-  background-color: #111827;
-  color: white;
+ .movie-search-container {
+  min-height: 100vh; 
+ background-color: #020817; 
+ color: rgb(111, 11, 11); 
+ margin-top: 25px; 
   padding: 2rem;
-}
-
-.movie-search-content {
-  /* max-width: 1200px; */
-  margin: 0 auto;
-}
-
-.movie-search-title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 2rem;
-  text-align: center;
-}
+} 
 
 .movie-search-box {
   margin-bottom: 2rem;
 }
-
+/* MOVES CARDS AND RESULTS INFO UP AND DOWN */
 .movie-input-group {
   display: flex;
-  gap: 0.5rem;
+  margin-bottom: 140px;
+  margin-left:-120px;
 }
 
+/* SEARCH BAR */
 .movie-search-input {
   flex: 1;
   padding: 0.75rem 1rem;
-  border-radius: 0.5rem;
-  background-color: #1f2937;
-  border: 1px solid #374151;
-  color: white;
-  font-size: 1rem;
+   width: 700px; 
+  border-radius: 1.5rem 0 0 1.5rem;
+  background-color: #2b2d2f;
+  color: rgb(241, 235, 235);
+   border: 1px solid #40bfd8;  
+  font-size: 1.4rem;
   outline: none;
+  margin-left: 10px;
+  transition: border-color 0.2s ease;
+   margin-bottom: 2300px; 
+   position: relative;
 }
-
+.movie-search-input:hover {
+  border-color: 2px solid #ff9800; 
+}
 .movie-search-input:focus {
-  border-color: #2563eb;
+ border-color: #eba925; 
+  box-shadow: 0px 0px 2px #5a6f70;
 }
 
+
+/* SEARCH BUTTON ICON/MAGNIFYING GLASS */
+.search-icon {
+  width: 26px;
+  height: 26px;
+}
+
+/* SEARCH BUTTON */
 .movie-search-button {
-  padding: 0.75rem 1.5rem;
-  background-color: #2563eb;
-  color: white;
-  border-radius: 0.5rem;
+  padding: 0.75rem 1.8rem;
+  background-color: rgb(239, 184, 31);
+  border-radius:0 1.5rem 1.5rem 0;;
   font-weight: 600;
   border: none;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.2s;
+  font-size: 1.5rem;
+ margin-bottom: 2300px; 
 }
 
 .movie-search-button:hover {
-  background-color: #1d4ed8;
+  background-color: #4ceaef; 
 }
 
 .movie-search-button:disabled {
   background-color: #4b5563;
   cursor: not-allowed;
+  margin-right: 80px;
 }
 
 .movie-loading-text {
@@ -73,65 +83,172 @@
   color: #ef4444;
 }
 
+/*  MOVIE RESULTS */
 .movie-results-title {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 1.3rem;
+  font-weight: 600;
   margin-bottom: 1.5rem;
+  color:rgb(234, 240, 234);
+  text-align: left;
+  margin-left: 2px;
 }
-
+.results-wrapper {
+  position:absolute;
+  padding: 0 24px;
+}
 .movie-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 4rem;
+  max-width: 1400px; 
 }
 
 .movie-card {
   background-color: #1f2937;
-  border-radius: 0.5rem;
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.2s;
+  box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.6),   /* inner glow */
+    2px 2px 5px rgba(0, 0, 0, 0.1);           /* existing outer shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: left;
+  width: 100%; /* Ensures cards take full width of their grid cell */
+  margin-right: 850px;
+  
 }
 
 .movie-card:hover {
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+  box-shadow: 
+    inset 0 0 30px rgba(255, 255, 255, 0.7),
+    0 0 10px rgba(184, 69, 19, 0.5);
+  filter: brightness(1.1);  
+  cursor: pointer;
 }
 
 .movie-poster {
   width: 100%;
   height: 400px;
-  object-fit: cover;
+   object-fit: cover; 
+   
+}
+.movie-poster:hover{
+  color:#9ca3af;
 }
 
+/* MOVIE CARD CONTAINER THAT HOLDS INFO (MOVIE TITLE, YEAR, GENRE) */
 .movie-card-content {
-  padding: 1rem;
+padding: 1rem; 
+ background-color: #292826;
+  font-weight: bold;
+  color:#d0d8e0;
+}
+.movie-search-title:hover {
+  color:#d0d8e0;
 }
 
-.movie-title {
-  font-size: 1.25rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
+
+/*  SIGNUP BUTTON */
+button{
+  background-color: rgb(46, 45, 44);
+  color: white;
+}
+
+.signup-form {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 1000;
+  text-align: right;
+}
+
+/*  SIGNUP BUTTON */
+.signup-toggle {
+  width: 240px;
+  height:50px;
+  padding: 8px;
+  background-color: rgb(23, 22, 23); 
+   font-size: 32px; 
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin-left: 1340px;
+  margin-right: 1900px;  
+  margin-top: 33px;
+  font-weight: 650;
+  border-radius: 30px;
+}
+.signup-toggle:hover {
+  background-color: #454647; 
+}
+.signup-dropdown {
+  display: flex;
+  flex-direction: column;
+  margin-right: 1920px;
+margin-left: 1790px; 
+ min-width:40%;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.2s ease;
+}
+
+.signup-dropdown.open {
+  max-height: 100px; 
+  opacity: 1;
+  margin-top: 0px;
+}
+
+.signup-dropdown input,
+.signup-dropdown button {
+  width: 170px;
+  padding: 15px 12px;
+  font-size: larger;
+}
+.create-account-btn {
+  background-color: #edb42f;
+  color: rgb(37, 35, 35);
+  padding: 8px 15px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  width: 1450px;
+  font-weight: 800;
+  font-size:x-large
+}
+
+.create-account-btn:hover {
+  background-color: #1cc9d9;
 }
 
 .movie-year {
-  color: #9ca3af;
-  margin-bottom: 0.5rem;
+  color:#f6f7fa;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .movie-actors {
-  color: #d1d5db;
-  margin-bottom: 0.5rem;
+  color: #f6f7fa;
   font-size: 0.875rem;
-}
+} 
 
 .movie-actors-label {
   font-weight: 600;
-}
+  
+} */
+ 
+.movie-title {
+  font-size: 1.25rem;
+  font-weight:400;
+  margin-bottom: 0.5rem;
+  color: #0a96a0;
+  width: 120px;
+  padding: 8px;
+  cursor: pointer;
+  margin-left: 1240px;
+  margin-top: 33px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 
+}
 .movie-rank {
-  color: #9ca3af;
+  color: #f6f7fa;
   font-size: 0.875rem;
   margin-bottom: 0.75rem;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;  
 }
 
 .movie-link {
@@ -153,4 +270,31 @@
 .movie-no-results {
   text-align: center;
   color: #9ca3af;
+}
+
+.top-bar {
+ position:sticky; 
+  top: 140px; 
+  left: 50px;
+  right: 60px;
+  bottom: 850px;
+  display: flex;
+  align-items: center;
+  padding: 16px 24px;
+  z-index: 1000;
+}
+.movie-search-title-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: rgb(246, 240, 240);
+  margin: 2px 240px 170px 60px; 
+}
+
+/* MOVES GRID AND SEARCH BAR */
+.movie-search-content {
+  flex: 1; 
+  display: flex;
+  justify-content: center;
+
+  margin: 10px 100px 0px 5px; 
 }

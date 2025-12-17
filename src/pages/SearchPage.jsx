@@ -14,7 +14,6 @@ const SearchPage = () => {
     setIsLoading(true);
     setError(null);
 
-    // fetch(`https://imdb.iamidiotareyoutoo.com/search?q=${encodeURIComponent(query)}`)
     fetch(`http://localhost:5500/api/${encodeURIComponent(query)}`)
       .then((response) => {
         if (!response.ok) {
@@ -40,9 +39,10 @@ const SearchPage = () => {
 
   return (
     <>
-    <div className="movie-search-content">
-      <h1 className="movie-search-title">Movie Search</h1>
-
+    
+      <div className="top-bar">
+       <h1 className="movie-search-title-name"></h1> 
+<div className="movie-search-content">
     <SearchBar
         query={query}
         isLoading={isLoading}
@@ -50,7 +50,7 @@ const SearchPage = () => {
         onSubmit={handleSubmit}
         onKeyPress={handleKeyPress}
       />
-
+</div>
       <SearchResults
         results={results}
         isLoading={isLoading}
