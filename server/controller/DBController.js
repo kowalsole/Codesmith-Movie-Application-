@@ -1,11 +1,5 @@
-#Mongo DB connection
-# add the mongo db connection underneath
-MONGO_URL=mongodb+srv://freshprince2124_db_user:<db_password>@cluster0.mkfgkun.mongodb.net/?appName=Cluster0
-
-const uri = "mongodb+srv://freshprince2124:clapback1234@iteration-project.pefncli.mongodb.net/?appName=Iteration-project"
-
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://freshprince2124:clapback1234@iteration-project.pefncli.mongodb.net/?appName=Iteration-project";
+
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
   serverApi: {
@@ -16,28 +10,17 @@ const client = new MongoClient(uri, {
 });
 async function run() {
   try {
+    
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
+
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
+
     // Ensures that the client will close when you finish/error
     await client.close();
   }
 }
 run().catch(console.dir);
-
-
-
-PORT=3000
-JWT_SECRET=your_jwt_secret_key
-# Add any other environment variables you need below
-
-DB_TYPE=postgres
-DB_USER=postgres
-DB_PASSWORD=MY_SECRET_PASSWORD 
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=movie_app_db
-DB_MAX_POOL_SIZE=1000

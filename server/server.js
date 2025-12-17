@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -10,6 +11,7 @@ import router from "./routes/routes.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+
 // server set up
 const app = express();
 const PORT = 5500;
@@ -17,7 +19,7 @@ const PORT = 5500;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(cors({
+app.use(cors({ // solid front and back end connection
   origin: 'http://localhost:5173'
 }));
 

@@ -1,5 +1,6 @@
 import SearchPage from "./pages/SearchPage";
 
+
 import "./App.css";
 import Signup from "./components/Signup";
 
