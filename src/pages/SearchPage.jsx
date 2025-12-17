@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./SearchPage.css";
+import { Link } from "react-router-dom"
 import SearchResults from "../components/SearchResults";
 import SearchBar from "../components/SearchBar";
 
@@ -51,6 +52,67 @@ const SearchPage = () => {
         onKeyPress={handleKeyPress}
       />
 
+      {isLoading && <p className="movie-loading-text">Loading results...</p>}
+
+      {error && <p className="movie-error-text">Error: {error}</p>}
+
+      {results && results.description && results.description.length > 0 && (
+        <div>
+          <h2 className="movie-results-title">
+            Found {results.description.length} result
+            {results.description.length !== 1 ? "s" : ""}
+          </h2>
+
+          <div className="movie-grid">
+            {results.description.map((movie, index) => (
+              <div key={movie["#IMDB_ID"] || index} className="movie-card">
+              <Link to={`/movie/${movie["#IMDB_ID"]}`}>
+                {movie["#IMG_POSTER"] && (
+                  <img 
+                    src={movie["#IMG_POSTER"]}
+                    alt={movie["#TITLE"]}
+                    className="movie-poster"
+                  />
+                )}
+                <h3 className="movie-title">{movie["#TITLE"]}</h3>
+              </Link>
+
+                  {movie["#YEAR"] && (
+                    <p className="movie-year">Year: {movie["#YEAR"]}</p>
+                  )}
+
+                  {movie["#ACTORS"] && movie["#ACTORS"].trim() && (
+                    <p className="movie-actors">
+                      <span className="movie-actors-label">Actors:</span>{" "}
+                      {movie["#ACTORS"]}
+                    </p>
+                  )}
+
+                  {movie["#RANK"] && (
+                    <p className="movie-rank">Rank: #{movie["#RANK"]}</p>
+                  )}
+
+                  {movie["#IMDB_URL"] && (
+                    <a
+                      href={movie["#IMDB_URL"]}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="movie-link"
+                    >
+                      View on IMDb
+                    </a>
+                  )}
+                </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {results && results.description && results.description.length === 0 && (
+        <p className="movie-no-results">
+          No results found. Try a different search term.
+        </p>
+      )}
       <SearchResults
         results={results}
         isLoading={isLoading}
