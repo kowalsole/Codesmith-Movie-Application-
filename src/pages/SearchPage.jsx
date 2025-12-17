@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./SearchPage.css";
+import { Link } from "react-router-dom"
 import SearchResults from "../components/SearchResults";
 import SearchBar from "../components/SearchBar";
 
