@@ -1,23 +1,41 @@
-import express from 'express';// 
-import * as userController from '../controllers/userController.js'; //importing user controller
-import authenticateToken from '../middleware/auth.js'; //importing auth middleqware
+import express from 'express';
+import { 
+  signupUser, 
+  loginUser, 
+  getAllUsers, 
+  getUserById 
+} from '../controller/userController.js';
 
-const router = express.Router(); ///creates a contrainer of simiar routes
+// Import authentication middleware
+// (If you haven't created this file yet, comment this line out)
+import authenticateToken from '../middleware/auth.js'; 
 
-// Public Routes (No Login Required)    
+const router = express.Router();
 
-router.get('/', userController.getUsers); // when someone visits this URL run this function and do not ask for a password
+// ==============================
+// 1. PUBLIC ROUTES (Open to everyone)
+// ==============================
 
-router.get('/:id', userController.getUserById); // when someone visits this URL run this function and do not ask for a password
+// Create a new user
+// URL: POST /api/users/signup
+router.post('/signup', signupUser);
 
-router.get('/', (req, res) => res.send('All Users')); 
-router.get('/profile', (req, res) => res.send('User Profile'));
+// Log in an existing user
+// URL: POST /api/users/login
+router.post('/login', loginUser);
 
-// Protected Routes (Requires Login)
-// We add 'authenticateToken' before the controller to protect this route
-router.get('/:id', authenticateToken, userController.getUserById);
 
-// Example of how the POST route 
-router.post('/', userController.registerUser); 
+// ==============================
+// 2. PROTECTED ROUTES (Requires Token)
+// ==============================
+
+// Get a list of all users
+// URL: GET /api/users/
+// We add 'authenticateToken' to ensure only logged-in users can see this
+router.get('/', authenticateToken, getAllUsers);
+
+// Get details for a specific user ID
+// URL: GET /api/users/:id
+router.get('/:id', authenticateToken, getUserById);
 
 export default router;

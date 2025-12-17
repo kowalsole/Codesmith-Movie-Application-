@@ -1,70 +1,119 @@
+// import "dotenv/config";
+// import express from "express";
+// import path from "path";
+// import { fileURLToPath } from "url";
+// import { dirname } from "path";
+// import cors from "cors";
+// import mongoose from "mongoose";
+// import bcrypt from "bcrypt";
+// import User from "./schema/userModel.js";
+// import router from "./routes/routes.js";
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
+
+
+// // server set up
+// const app = express();
+// const PORT = 5500;
+
+// app.use(express.urlencoded({ extended: true }));
+// app.use(express.json());
+
+// app.use(cors({ // solid front and back end connection
+//   origin: 'http://localhost:5173'
+// }));
+
+// const MONGODB_URI =
+//   process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/moviesApp";
+
+// app.use("/api", router);
+// // mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+// // .then(() => console.log("Connected to MongoDB"))
+// // .catch(err => console.error("MongoDB connection error:", err));
+
+// mongoose
+//   .connect(MONGODB_URI)
+
+//   // , { useNewUrlParser: true, useUnifiedTopology: true })
+//   .then(() => console.log("Connected to MongoDB"))
+//   .catch((err) => console.error("MongoDB connection error:", err));
+
+
+
+// app.post("/signup", async (req, res) => {
+//   try {
+//     const { username, email, password } = req.body;
+//     if (!username || !password || !email) {
+//       return res.status(400).send("username, email and password are required");
+//     }
+
+//     // check uniqueness by username or email
+//     const existing = await User.findOne({ $or: [{ username }, { email }] });
+//     if (existing) {
+//       return res.status(409).send("username or email already in use");
+//     }
+
+//     const passwordHash = await bcrypt.hash(password, 12);
+//     const newUser = new User({ username, email, passwordHash });
+//     await newUser.save();
+
+//     // redirect to login page after successful signup
+//     return res.redirect("/login");
+//   } catch (err) {
+//     console.error(err);
+//     return res.status(500).send("server error");
+//   }
+// });
+
+// app.listen(PORT, () => {
+//   console.log(`Server listening on port: ${PORT}`);
+// });
+
+// export default app;
+
+// cleaned up code below
+
 import "dotenv/config";
 import express from "express";
-import path from "path";
-import { fileURLToPath } from "url";
-import { dirname } from "path";
 import cors from "cors";
 import mongoose from "mongoose";
-import bcrypt from "bcrypt";
-import User from "./schema/userModel.js";
-import router from "./routes/routes.js";
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
+// Import your Routes
+import moviesRoutes from "./routes/moviesRoutes.js"; 
+import userRoutes from "./routes/userRoutes.js";     
 
-// server set up
 const app = express();
-const PORT = 5500;
+const PORT = process.env.PORT || 5500;
 
-app.use(express.urlencoded({ extended: true }));
+// --- MIDDLEWARE ---
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.use(cors({ // solid front and back end connection
-  origin: 'http://localhost:5173'
+// Solid Front-end and Back-end connection
+app.use(cors({ 
+  origin: 'http://localhost:5173',
+  credentials: true 
 }));
 
-const MONGODB_URI =
-  process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/moviesApp";
-
-app.use("/api", router);
-// mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-// .then(() => console.log("Connected to MongoDB"))
-// .catch(err => console.error("MongoDB connection error:", err));
+// --- DATABASE CONNECTION ---
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/moviesApp";
 
 mongoose
   .connect(MONGODB_URI)
-
-  // , { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
+// --- MOUNTING ROUTES ---
 
+// 1. User Routes (Signup, Login, etc.)
+// Full URL example: http://localhost:5500/api/users/signup
+app.use("/api/users", userRoutes);
 
-app.post("/signup", async (req, res) => {
-  try {
-    const { username, email, password } = req.body;
-    if (!username || !password || !email) {
-      return res.status(400).send("username, email and password are required");
-    }
+// 2. Movie Routes (Search, Details, etc.)
+// Full URL example: http://localhost:5500/api/movies/action
+app.use("/api/movies", moviesRoutes);
 
-    // check uniqueness by username or email
-    const existing = await User.findOne({ $or: [{ username }, { email }] });
-    if (existing) {
-      return res.status(409).send("username or email already in use");
-    }
-
-    const passwordHash = await bcrypt.hash(password, 12);
-    const newUser = new User({ username, email, passwordHash });
-    await newUser.save();
-
-    // redirect to login page after successful signup
-    return res.redirect("/login");
-  } catch (err) {
-    console.error(err);
-    return res.status(500).send("server error");
-  }
-});
-
+// --- STARTING THE SERVER ---
 app.listen(PORT, () => {
   console.log(`Server listening on port: ${PORT}`);
 });

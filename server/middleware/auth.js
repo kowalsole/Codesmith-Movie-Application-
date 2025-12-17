@@ -1,26 +1,33 @@
-const jwt = require ('jsonwebtoken')
+import jwt from 'jsonwebtoken';
 
-const authentication = (req, res, next) => {
-    const token = req.cookies.auth_token;
+const authenticateToken = (req, res, next) => {
+    // 1. Get the token from the "Authorization" header
+    // The frontend sends it like: "Bearer eyJhbGciOi..."
+    const authHeader = req.headers['authorization'];
     
+    // We split the string to remove the word "Bearer " and keep just the token
+    const token = authHeader && authHeader.split(' ')[1];
+
     if (!token) {
-        return res.status (401).send('Access Denied: No token provided')
+        return res.status(401).json({ error: 'Access Denied: No token provided' });
     }
 
     try {
-        //if the token has been tampered this line of code will throw an error
+        // 2. Verify the token
+        // If the token has been tampered with, this throws an error
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-        //attaching the user information to the request object
-        //now the function knows exactly who this user is 
+        // 3. Attach user info to the request
+        // Now the next function (like getUserById) knows exactly who this is
         req.user = decoded; 
 
-        //Next is the actual route
+        // 4. Move to the next step
         next();
+
     } catch (err) {
-        res.status(403).send('Invalid Token')
+        return res.status(403).json({ error: 'Invalid Token' });
     }
 }; 
 
-module.exports = authenticatetoken; // this might be incorrect 
-
+// Export it so userRoutes.js can use it
+export default authenticateToken;
