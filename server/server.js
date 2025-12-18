@@ -39,7 +39,13 @@ const MONGODB_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/movies
 
 mongoose
   .connect(MONGODB_URI)
-  .then(() => console.log("Connected to MongoDB"))
+  .then(() => {
+    console.log("Connected to MongoDB");
+    // Drop the old username index if it exists
+    mongoose.connection.collection('users').dropIndex('username_1').catch(() => {
+      // Index doesn't exist, that's fine
+    });
+  })
   .catch((err) => console.error("MongoDB connection error:", err));
 
 // --- MOUNTING ROUTES ---
