@@ -1,7 +1,6 @@
 import React from "react";
 import MovieCard from "./MovieCard";
 
-
 const SearchResults = ({ results, isLoading, error }) => {
   if (isLoading) {
     return <p className="movie-loading-text">Loading results...</p>;

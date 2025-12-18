@@ -1,4 +1,5 @@
 import { useState } from "react";
+import searchIcon from "../assets/popcorn.png";
 
 export default function Signup() {
   const [username, setUsername] = useState("");
@@ -41,15 +42,20 @@ export default function Signup() {
         onClick={() => setOpen((prev) => !prev)}
         className="signup-toggle"
       >
-       {open ? "Sign Up" : "Movie Search"}
+       
+       {open ? "Sign Up" : "Movie Search 🍿"}
+       
       </button>
 
       <div className={`signup-dropdown ${open ? "open" : ""}`}>
-        
+        <form onSubmit={handleSubmit} className="signup-form">
         <input type="email" placeholder="Email" />
         <input type="password" placeholder="Password" />
-
-        <button type="submit" className="create-account-btn">Create Account</button>
+  <button type="submit" className="create-account-btn">
+    Create Account
+  </button>
+  </form>
+        {/* <button type="submit" className="create-account-btn">Create Account</button> */}
       </div>
     </form>
 </div>

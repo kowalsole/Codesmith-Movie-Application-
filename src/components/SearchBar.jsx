@@ -19,7 +19,7 @@ const SearchBar = ({ query, isLoading, onQueryChange, onSubmit, onKeyPress }) =>
           className="movie-search-button"
         >
          {isLoading ? (
-  <span>Searching...</span>
+  <span></span>
 ) : (
   <img
     src={searchIcon}
