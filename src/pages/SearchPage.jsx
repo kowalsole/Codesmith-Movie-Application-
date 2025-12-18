@@ -14,8 +14,13 @@ const SearchPage = () => {
     setError(null);
 
     // fetch(`https://imdb.iamidiotareyoutoo.com/search?q=${encodeURIComponent(query)}`)
-    fetch(`http://localhost:5500/api/${encodeURIComponent(query)}`)
+    fetch(`http://localhost:5500/api/movies/${encodeURIComponent(query)}`)
       .then((response) => {
+        if (response.status === 401) {
+          localStorage.removeItem("token");
+          window.location.href = "/login";
+          return;
+        }
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }

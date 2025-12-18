@@ -1,11 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Recommended for moving to login page
 
 export default function Signup() {
-  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  
+  const navigate = useNavigate(); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -13,28 +15,34 @@ export default function Signup() {
     setSuccess(false);
 
     try {
-      const response = await fetch("http://localhost:3000/api/users", { // this URL should match the backend route created in main.jsx
+      // UPDATED URL: Port 5500 and the /signup path
+      const response = await fetch("http://localhost:5500/api/users/signup", { 
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, email, password }),
+        body: JSON.stringify({ email, password }),
       });
 
-      const data = await response.text();
+      const data = await response.json(); // UPDATED to .json()
+
       if (!response.ok) {
-        setError(data || "Signup failed");
+        // Since the backend sends { error: "msg" }, we use data.error
+        setError(data.error || "Signup failed");
         return;
       }
+
       setSuccess(true);
-      setUsername("");
       setEmail("");
       setPassword("");
-      setError(""); // what does this line of code do? 
-
       
+      // Navigate to login after a short delay so they can see the success message
+      setTimeout(() => {
+        navigate("/login"); 
+      }, 2000);
+
     } catch (err) {
-      setError("An error occurred. Server is offline or unreachable. Please try again.");
+      setError("Server is offline. Make sure to run 'node server.js' in your terminal.");
     }
   };
 
@@ -42,34 +50,24 @@ export default function Signup() {
     <div>
       <h2>Sign Up</h2>
       {error && <p style={{ color: "red" }}>{error}</p>}
-      
-      {/* {success && <p style={{ color: "green" }}>Signup successful!</p>}
-      {error && !success && <p>Please fill in all fields.</p>}
-       */}
+      {success && <p style={{ color: "green" }}>Signup successful! Redirecting to login...</p>}
 
       <form onSubmit={handleSubmit}>
         <div>
-          <input
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-
           <input
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
-
           <input
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
-
           <button type="submit">Sign Up</button>
         </div>
       </form>

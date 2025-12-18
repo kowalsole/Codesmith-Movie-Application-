@@ -7,32 +7,32 @@ import User from "../schema/userModel.js";
 // ==============================
 export const signupUser = async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { email, password } = req.body;
 
     // Validation
-    if (!username || !password || !email) {
-      return res.status(400).json({ error: "Username, email, and password are required" });
+    if (!password || !email) {
+      return res.status(400).json({ error: "Email and password are required" });
     }
 
     // Check Uniqueness
-    const existing = await User.findOne({ $or: [{ username }, { email }] });
+    const existing = await User.findOne({ email });
     if (existing) {
-      return res.status(409).json({ error: "Username or email already in use" });
+      return res.status(409).json({ error: "Email already in use" });
     }
 
     // Hash Password
     const passwordHash = await bcrypt.hash(password, 12);
 
     // Create User
-    const newUser = new User({ username, email, passwordHash });
+    const newUser = new User({ email, passwordHash });
     await newUser.save();
 
     // SUCCESS
     return res.status(201).json({ message: "User created successfully!" });
 
   } catch (error) {
-    console.error("Signup Error:", error);
-    return res.status(500).json({ error: "An error occurred during signup." });
+    console.error("Signup Error:", error.message, error.stack);
+    return res.status(500).json({ error: "An error occurred during signup: " + error.message });
   }
 };
 
@@ -41,10 +41,10 @@ export const signupUser = async (req, res) => {
 // ==============================
 export const loginUser = async (req, res) => {
     try {
-        const { username, password } = req.body;
+        const { email, password } = req.body;
         
         // Find user
-        const user = await User.findOne({ username });
+        const user = await User.findOne({ email });
         if (!user) {
             return res.status(400).json({ error: "Invalid credentials" });
         }
@@ -57,7 +57,7 @@ export const loginUser = async (req, res) => {
 
         // Create Token 
         const token = jwt.sign(
-          { id: user._id, username: user.username }, 
+          { id: user._id, email: user.email }, 
           process.env.JWT_SECRET,                    
           { expiresIn: "1h" }                        
         );
@@ -68,14 +68,13 @@ export const loginUser = async (req, res) => {
             token: token, 
             user: { 
                 id: user._id, 
-                username: user.username,
                 email: user.email 
             } 
         });
 
     } catch (err) {
-        console.error("Login Error:", err); 
-        res.status(500).json({ error: "Login failed" });
+        console.error("Login Error:", err.message, err.stack); 
+        res.status(500).json({ error: "Login failed: " + err.message });
     }
 }
 

@@ -24,6 +24,7 @@
     "pg": "^8.16.3",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-router-dom": "^7.11.0",
     "rotating-file-stream": "^3.2.7",
     "tailwind": "^2.3.1"
   },
